@@ -1,0 +1,51 @@
+<html>
+<head>
+	<title>My first Three.js app</title>
+	<style>canvas { width: 100%; height: 100% }</style>
+</head>
+<body>
+<script src="lib/three.min.js"></script>
+<script>
+	var scene = new THREE.Scene();
+	var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+
+	var renderer = new THREE.WebGLRenderer({antialias: true});
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	document.body.appendChild(renderer.domElement);
+
+	var geometry = new THREE.SphereGeometry(30, 20, 20)
+	var material = new THREE.MeshBasicMaterial({color: 0x000000, alpha: 0.1,  wireframe: true});
+	var cube = new THREE.Mesh(geometry, material);
+	scene.add(cube);
+
+	var geometry = new THREE.CubeGeometry(5,5,5);
+	var material = new THREE.MeshBasicMaterial({color: 0x000000, alpha: 0.1,  wireframe: true});
+	var tank = new THREE.Mesh(geometry, material);
+	tank.position.x = 30;
+	scene.add(tank);
+
+	var step = 0;
+
+	camera.position.z = 50;
+
+	var render = function () {
+		requestAnimationFrame(render);
+
+		step++;
+
+		tank.position.x = 35 * Math.sin(step/120);
+		tank.position.y = 35 * Math.cos(step/120);
+		tank.rotation.z = -step/120;
+		//tank.position.y += 0.05;
+		//	tank.position.z += 0.05;
+
+		//cube.rotation.x += 0.005;
+		//cube.rotation.y += 0.005;
+
+		renderer.render(scene, camera);
+	};
+
+	render();
+</script>
+</body>
+</html>
