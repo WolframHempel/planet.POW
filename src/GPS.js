@@ -11,7 +11,8 @@ pp.GPS = function( planetRadius )
  */
 pp.GPS.prototype.getCartesian = function( longitude, lattitude )
 {
-	var z = Math.sin(longitude);
+	var x = Math.sin(lattitude);
 	var y = Math.cos(longitude);
-	return { x: 0, y: this._nPlanetRadius * y, z:this._nPlanetRadius * z };
+	var z = Math.sin(longitude) * Math.cos(lattitude);
+	return { x: this._nPlanetRadius * x, y: this._nPlanetRadius * y, z:this._nPlanetRadius * z };
 }
