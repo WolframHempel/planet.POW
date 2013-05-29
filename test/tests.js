@@ -7,13 +7,13 @@ var Deg90 = Math.sin(6*Math.PI/12);
 
 test( "test position at North Pole", function() {
 	var gps = new pp.GPS( 100 );
-	var cartesianCoords = gps.getCartesian( 0,0 );
+	var cartesianCoords = gps.getCartesian( Math.PI/2,0 );
 	assertCartesianCoords( cartesianCoords,0, 100, 0 );
 });
 
 test( "test position at 30 North", function() {
 	var gps = new pp.GPS( 100 );
-	var cartesianCoords = gps.getCartesian( Math.PI/6 ,0 );
+	var cartesianCoords = gps.getCartesian( Math.PI/3 ,0 );
 	assertCartesianCoords( cartesianCoords,0, Deg60 * 100, Deg30 * 100 );
 });
 
@@ -25,50 +25,50 @@ test( "test position at 30 North", function() {
 
 test( "test position at 60 North", function() {
 	var gps = new pp.GPS( 100 );
-	var cartesianCoords = gps.getCartesian( Math.PI/3 ,0 );
+	var cartesianCoords = gps.getCartesian( Math.PI/6 ,0 );
 	assertCartesianCoords( cartesianCoords,0, Deg30 * 100, Deg60 * 100 );
 });
 
 test( "test position at Greenwich Equator", function() {
 	var gps = new pp.GPS(100);
-	var cartesianCoords = gps.getCartesian(Math.PI/2,0);
+	var cartesianCoords = gps.getCartesian(0,0);
 	assertCartesianCoords( cartesianCoords,0, 0, 100 );
 });
 
 test( "test position at South Pole", function() {
 	var gps = new pp.GPS( 100 );
-	var cartesianCoords = gps.getCartesian( Math.PI,0 );
+	var cartesianCoords = gps.getCartesian( -Math.PI/2,0 );
 	assertCartesianCoords( cartesianCoords,0, -100, 0 );
 });
 
 test( "test position at 90 East on Equator", function() {
 	var gps = new pp.GPS(100);
-	var cartesianCoords = gps.getCartesian(Math.PI/2,Math.PI/2);
+	var cartesianCoords = gps.getCartesian(0,Math.PI/2);
 	assertCartesianCoords( cartesianCoords, 100, 0, 0 );
 });
 
 test( "test position at 90 West on Equator", function() {
 	var gps = new pp.GPS(100);
-	var cartesianCoords = gps.getCartesian(Math.PI/2, -Math.PI/2);
+	var cartesianCoords = gps.getCartesian(0, -Math.PI/2);
 	assertCartesianCoords( cartesianCoords, -100, 0, 0 );
 });
 
 test( "test position at 180 East on Equator", function() {
 	var gps = new pp.GPS(100);
-	var cartesianCoords = gps.getCartesian(Math.PI/2, Math.PI);
+	var cartesianCoords = gps.getCartesian(0, Math.PI);
 	assertCartesianCoords( cartesianCoords, 0, 0, -100 );
 });
 
 test( "test position at 180 West on Equator", function() {
 	var gps = new pp.GPS(100);
-	var cartesianCoords = gps.getCartesian(Math.PI/2, -Math.PI);
+	var cartesianCoords = gps.getCartesian(0, -Math.PI);
 	assertCartesianCoords( cartesianCoords, 0, 0, -100 );
 });
 //
 test( "test position at 60 North 90 West", function() {
 	var gps = new pp.GPS( 100 );
-	var cartesianCoords = gps.getCartesian(Math.PI/6, -Math.PI/2);
-	assertCartesianCoords( cartesianCoords, -50, 0, 0 );
+	var cartesianCoords = gps.getCartesian(Math.PI/3, -Math.PI/2);
+	assertCartesianCoords( cartesianCoords, -50, Deg60 * 100, 0 );
 });
 
 function assertCartesianCoords( cartesianCoords, x, y, z ) {
