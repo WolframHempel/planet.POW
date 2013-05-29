@@ -1,4 +1,4 @@
 window.onload = function()
 {
-	var oPlanetPow = new pp.Game( document.body );
+	var oPlanetPow = new pp.Game( document.getElementById("render") );
 };

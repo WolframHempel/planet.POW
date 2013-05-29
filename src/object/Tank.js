@@ -7,7 +7,8 @@ pp.object.Tank = function()
 	this._oMesh = new THREE.Mesh( this._oGeometry, this._oMaterial );
 	this._oWorld = null;
 
-	this._nStep = 0;
+	long = 0;
+	lat = 0;
 };
 
 pp.object.Tank.prototype.setWorld = function( oWorld )
@@ -23,8 +24,9 @@ pp.object.Tank.prototype.getThreeObject = function()
 
 pp.object.Tank.prototype.update = function( nTime )
 {
-		this._nStep++;
-		this._oMesh.position.x = 20 * Math.sin(this._nStep/120);
-		this._oMesh.position.y = 20 * Math.cos(this._nStep/120);
-		this._oMesh.rotation.z = -this._nStep/120;
+	var gps = new pp.GPS(20);
+	var coords = gps.getCartesian(lat, long);
+	this._oMesh.position.x = coords.x;
+	this._oMesh.position.y = coords.y;
+	this._oMesh.position.z = coords.z;
 };
