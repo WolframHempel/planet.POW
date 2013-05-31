@@ -17,6 +17,8 @@ pp.object.Tank = function()
     this.long = 0;
 
 	this._oMesh.position.z = 20;
+
+    this.gps = new pp.GPS(20, this.vector, this.facingVector,this._oMesh);
 };
 
 pp.object.Tank.prototype.setWorld = function( oWorld )
@@ -34,14 +36,14 @@ pp.object.Tank.prototype.destroy = function()
 
 pp.object.Tank.prototype.update = function( nTime )
 {
-	var gps = new pp.GPS(20, this.vector, this.facingVector,this._oMesh);
 
-    var dLat = lat - this.lat;
+
+    var forward = lat - this.lat;
     this.lat = lat;
-    var dLong = long - this.long;
+    var turn = long - this.long;
     this.long = long;
 
-    gps.move(dLat, dLong);
+    this.gps.move(forward, turn);
 };
 
 
