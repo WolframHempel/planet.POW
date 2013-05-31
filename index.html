@@ -5,15 +5,17 @@
 
 		<script type="text/javascript" src="lib/three.min.js"></script>
 		<script type="text/javascript" src="lib/shims.js"></script>
+		<script type="text/javascript" src="lib/datgui.js"></script>
 
 		<!-- General -->
 		<script type="text/javascript" src="src/namespace.js"></script>
-		<script type="text/javascript" src="src/EventEmitter.js"></script>
+		<script type="text/javascript" src="src/tools/EventEmitter.js"></script>
 		<script type="text/javascript" src="src/GPS.js"></script>
 
 		<!--Object-->
 		<script type="text/javascript" src="src/object/Planet.js"></script>
 		<script type="text/javascript" src="src/object/Tank.js"></script>
+		<script type="text/javascript" src="src/object/AntiAircraft.js"></script>
 
 		<!--view-->
 		<script type="text/javascript" src="src/view/MainView.js"></script>
@@ -29,8 +31,5 @@
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 	</head>
 	<body>
-	<input type="range" onchange="lat = ((this.value/100) * Math.PI) - Math.PI/2"/>
-	<input type="range" onchange="long = ((2 * (this.value/100) * Math.PI) - Math.PI)"/>
-	<div id="render"></div>
 	</body>
 </html>

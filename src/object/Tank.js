@@ -22,12 +22,14 @@ pp.object.Tank = function()
 pp.object.Tank.prototype.setWorld = function( oWorld )
 {
 	this._oWorld = oWorld;
+	this._oWorld.getScene().add( this._oMesh );
 	this._oWorld.on("update", this.update, this);
 };
 
-pp.object.Tank.prototype.getThreeObject = function()
+pp.object.Tank.prototype.destroy = function()
 {
-	return this._oMesh;
+	this._oWorld.unbind( "update", this.update );
+	this._oWorld.getScene().remove( this._oMesh );
 };
 
 function getPerpendicular(vector1, vector2) {
@@ -57,7 +59,6 @@ function calculateRotationBetweenTwoNormals(currentPosition, directionVector, la
 pp.object.Tank.prototype.update = function( nTime )
 {
 	var gps = new pp.GPS(20);
-
     var dLat = lat - this.lat;
     this.lat = lat;
 
@@ -115,3 +116,4 @@ function rotateAroundWorldAxis(object, axis, radians) {
     // old code for Three.js v49:
     // object.rotation.getRotationFromMatrix(object.matrix, object.scale);
 }
+
