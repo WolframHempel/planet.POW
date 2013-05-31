@@ -9,6 +9,8 @@ pp.Game = function( eContainer )
 	this._oTank = new pp.object.Tank();
 	this._oWorld.add( this._oTank );
 
+	this._oPlayer = new pp.Player(this._oWorld, this._oTank);
+
 	// this._oAntiAircraft = new pp.object.AntiAircraft();
 	// this._oWorld.add( this._oAntiAircraft );
 
