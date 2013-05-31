@@ -10,6 +10,8 @@ pp.object.Tank = function()
     this.vector = new THREE.Vector3( 0, 0, 20 );
     this.facingVector =  new THREE.Vector3(0,-1,0);
 
+	this.instructions = {forward: 0, turn: 0};
+
     long = 0;
     lat = 0;
 
@@ -38,13 +40,18 @@ pp.object.Tank.prototype.update = function( nTime )
 {
 
 
-    var forward = lat - this.lat;
+    var forward = this.instructions.forward;
     this.lat = lat;
-    var turn = long - this.long;
+    var turn = this.instructions.turn;
     this.long = long;
 
     this.gps.move(forward, turn);
 };
+
+pp.object.Tank.prototype.setInstructions = function( instructions )
+{
+	this.instructions = instructions;
+}
 
 
 
