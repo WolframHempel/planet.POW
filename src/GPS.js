@@ -16,3 +16,20 @@ pp.GPS.prototype.getCartesian = function( lattitude, longitude )
 	var z = Math.cos(lattitude) * Math.cos(longitude);
 	return { x: this._nPlanetRadius * x, y: this._nPlanetRadius * y, z:this._nPlanetRadius * z };
 }
+
+pp.GPS.prototype.getRotation = function( startPosition, endPosition )
+{
+	var dLat = endPosition.lat - startPosition.lat;
+	var dLong = endPosition.long - startPosition.long
+	var x = - dLat * Math.cos(dLong);
+	var y = dLong * Math.cos(dLat);
+	var z = dLat * Math.sin(dLong);
+	return { x: x, y: y, z: z };
+}
+
+pp.GPS.prototype.getDistance = function( startPosition, endPosition )
+{
+	var dLat = Math.abs(endPosition.lat - startPosition.lat);
+	var dLong = endPosition.long - startPosition.long
+	return dLat;
+}
