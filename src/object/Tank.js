@@ -34,14 +34,14 @@ pp.object.Tank.prototype.destroy = function()
 
 pp.object.Tank.prototype.update = function( nTime )
 {
-	var gps = new pp.GPS(20);
+	var gps = new pp.GPS(20, this.vector, this.facingVector,this._oMesh);
 
     var dLat = lat - this.lat;
     this.lat = lat;
     var dLong = long - this.long;
     this.long = long;
 
-    gps.move(dLat, dLong, this.vector, this.facingVector,this._oMesh);
+    gps.move(dLat, dLong);
 };
 
 
