@@ -33,3 +33,27 @@ pp.GPS.prototype.getDistance = function( startPosition, endPosition )
 	var dLong = endPosition.long - startPosition.long
 	return dLat;
 }
+
+pp.GPS.prototype.move = function(forward, turn, position, facing, mesh){
+    var quaternion = pp.MathUtilities.calculateRotationBetweenTwoNormals(position, facing, forward);
+
+    //Calculate Tanks new position
+    position.applyQuaternion( quaternion );
+    facing.applyQuaternion( quaternion );
+
+    //Update the meshes position
+    mesh.position.x = position.x;
+    mesh.position.y = position.y;
+    mesh.position.z = position.z;
+
+    // Rotate Tank Appropriately in forward and backwards
+    var vectorNorm = pp.MathUtilities.duplicateVectorNorm(position);
+    var facingVectorNorm = pp.MathUtilities.duplicateVectorNorm(facing);
+    var perp = pp.MathUtilities.getPerpendicular(vectorNorm, facingVectorNorm);
+    pp.MathUtilities.rotateAroundWorldAxis(mesh, perp, forward);
+
+    // Rotate Tank Appropriately in left and right
+    var currentPositionNorm = pp.MathUtilities.duplicateVectorNorm(position);
+    pp.MathUtilities.rotateAroundWorldAxis(mesh, currentPositionNorm, turn);
+    pp.MathUtilities.rotateVectorAroundAxis(facing, currentPositionNorm, turn);
+}
