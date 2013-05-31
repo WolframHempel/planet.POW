@@ -12,6 +12,5 @@ pp.Player.prototype.receiveData = function( data )
 }
 pp.Player.prototype.receiveInstruction = function( instructions )
 {
-	debugger;
 	this.tank.setInstructions(instructions.tank);
 }
