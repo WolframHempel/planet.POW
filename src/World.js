@@ -1,14 +1,29 @@
 pp.World = function()
 {
-	pp.EventEmitter.call( this );
+	pp.tools.EventEmitter.call( this );
 	
-	this.scene = new THREE.Scene();
+	this._oScene = new THREE.Scene();
 
 	this._nTime = performance.now();
 
 	this._pObjects = [];
-AAA = this;
+
 	this.update();
+};
+
+pp.World.prototype.getObjectsByClass = function( fClass )
+{
+	var pResult = [];
+
+	for( var i = 0; i < this._pObjects.length; i++ )
+	{
+		if( this._pObjects[ i ] instanceof fClass )
+		{
+			pResult.push( this._pObjects[ i ] );
+		}
+	}
+
+	return pResult;
 };
 
 pp.World.prototype.update = function( nTime )
@@ -23,6 +38,10 @@ pp.World.prototype.update = function( nTime )
 pp.World.prototype.add = function( oObject )
 {
 	this._pObjects.push( oObject );
-	this.scene.add( oObject.getThreeObject() );
 	oObject.setWorld( this );
+};
+
+pp.World.prototype.getScene = function()
+{
+	return this._oScene;
 };

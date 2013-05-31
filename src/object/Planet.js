@@ -9,12 +9,18 @@ pp.object.Planet = function()
 	this._oWorld = null;
 };
 
+pp.object.Planet.prototype.getMesh = function()
+{
+	return this._oMesh;
+};
+
 pp.object.Planet.prototype.setWorld = function( oWorld )
 {
 	this._oWorld = oWorld;
+	this._oWorld.getScene().add( this._oMesh );
 };
 
-pp.object.Planet.prototype.getThreeObject = function()
+pp.object.Planet.prototype.destroy = function()
 {
-	return this._oMesh;
+	this._oWorld.getScene().remove( this._oMesh );
 };
