@@ -9,6 +9,7 @@ pp.World = function()
 	this._pObjects = [];
 
 	this.update();
+	this.player = null;
 };
 
 pp.World.prototype.getObjectsByClass = function( fClass )
@@ -33,12 +34,20 @@ pp.World.prototype.update = function( nTime )
 
 	this._nTime = nTime;
 	requestAnimFrame( this.update.bind( this ) );
+	if (this.player) {
+		this.player.receiveData(null);
+	}
 };
 
 pp.World.prototype.add = function( oObject )
 {
 	this._pObjects.push( oObject );
 	oObject.setWorld( this );
+};
+
+pp.World.prototype.addPlayer = function( cAI )
+{
+	var player = new pp.Player(this, cAI);
 };
 
 pp.World.prototype.getScene = function()

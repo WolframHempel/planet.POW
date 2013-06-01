@@ -6,7 +6,7 @@ pp.Game = function( eContainer )
 	this._oPlanet = new pp.object.Planet();
 	this._oWorld.add( this._oPlanet );
 
-	this._oPlayer = new pp.Player(this._oWorld);
+	this._oWorld.addPlayer(pp.KeyboardAI);
 
 	// this._oAntiAircraft = new pp.object.AntiAircraft();
 	// this._oWorld.add( this._oAntiAircraft );
