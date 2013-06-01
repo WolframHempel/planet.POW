@@ -1,9 +1,9 @@
 pp.GPS = function( planetRadius, vector, facingVector, mesh)
 {
 	this._nPlanetRadius = planetRadius;
-    this.vector = vector;
-    this.facingVector = facingVector;
-    this.mesh = mesh;
+    this._oVector = vector;
+    this._oFacingVector = facingVector;
+    this._oMesh = mesh;
 }
 
 /**
@@ -38,9 +38,9 @@ pp.GPS = function( planetRadius, vector, facingVector, mesh)
 //}
 
 pp.GPS.prototype.move = function(forward, turn){
-    var position = this.vector;
-    var facing = this.facingVector;
-    var mesh = this.mesh;
+    var position = this._oVector;
+    var facing = this._oFacingVector;
+    var mesh = this._oMesh;
     var quaternion = pp.MathUtilities.calculateRotationBetweenTwoNormals(position, facing, forward);
 
     //Calculate Tanks new position

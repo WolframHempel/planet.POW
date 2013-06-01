@@ -21,48 +21,48 @@
 
 pp.KeyboardAI = function( callback )
 {
-	this.forward = 0;
-	this.turn = 0;
-	this.upDown = false;
-	this.downDown = false;
-	this.rightDown = false;
-	this.leftDown = false;
+	this._nForward = 0;
+	this._nTurn = 0;
+	this._bUpDown = false;
+	this._bDownDown = false;
+	this._bRightDown = false;
+	this._bLeftDown = false;
 	var my_scope = this;
 	var my_combos = [
 		{
 			"keys" : "up",
 			"on_keydown" : function() {
-				this.upDown = true;
+				this._bUpDown = true;
 			},
 			"on_keyup" : function(e) {
-				this.upDown = false;
+				this._bUpDown = false;
 			},
 			"this" : my_scope
 		},{
 			"keys" : "down",
 			"on_keydown" : function() {
-				this.downDown = true;
+				this._bDownDown = true;
 			},
 			"on_keyup" : function(e) {
-				this.downDown = false;
+				this._bDownDown = false;
 			},
 			"this" : my_scope
 		},{
 			"keys" : "right",
 			"on_keydown" : function() {
-				this.rightDown = true;
+				this._bRightDown = true;
 			},
 			"on_keyup" : function(e) {
-				this.rightDown = false;
+				this._bRightDown = false;
 			},
 			"this" : my_scope
 		},{
 			"keys" : "left",
 			"on_keydown" : function() {
-				this.leftDown = true;
+				this._bLeftDown = true;
 			},
 			"on_keyup" : function(e) {
-				this.leftDown = false;
+				this._bLeftDown = false;
 			},
 			"this" : my_scope
 		}
@@ -75,10 +75,10 @@ pp.KeyboardAI.prototype.receiveData = function( data )
 {
 	var forward = 0;
 	var turn = 0;
-	this.upDown ? forward += 0.01 : null ;
-	this.downDown ? forward -= 0.01 : null ;
-	this.rightDown ? turn -= 0.03 : null ;
-	this.leftDown ? turn += 0.03 : null ;
-	this.callback.receiveInstruction({tank: {forward: forward , turn: turn}});
+	this._bUpDown ? forward += 0.01 : null ;
+	this._bDownDown ? forward -= 0.01 : null ;
+	this._bRightDown ? turn -= 0.03 : null ;
+	this._bLeftDown ? turn += 0.03 : null ;
+	this.callback.receiveInstruction( {tank: {_nForward: forward , _nTurn: turn}} );
 }
 
