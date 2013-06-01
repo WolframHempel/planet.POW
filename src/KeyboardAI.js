@@ -19,7 +19,7 @@
 		102:"num_6",103:"num_7",104:"num_8",105:"num_9",106:"num_multiply",107:"num_add",108:"num_enter",109:"num_subtract",110:"num_decimal",111:"num_divide",124:"print",144:"num",145:"scroll",186:";",187:"=",188:",",189:"-",190:".",191:"/",192:"`",219:"[",220:"\\",221:"]",222:"'",223:"`",224:"cmd",57392:"ctrl",63289:"num"};for(v in n)u=n[v],B.push(u);for(v in q)u=q[v],B.push(u);-1!==navigator.userAgent.indexOf("Mac OS X")&&(J="cmd");-1!==navigator.userAgent.indexOf("Opera")&&(n["17"]="cmd");L=function(a){return(document.attachEvent?
 		document.readyState==="complete":document.readyState!=="loading")?a():setTimeout(function(){return L(a)},9)};L(function(){document.body.onkeydown=function(a){a=a||window.event;z(a,true);return R(a)};document.body.onkeyup=function(a){a=a||window.event;return z(a,false)};return window.onblur=function(){var a,c,b;c=0;for(b=g.length;c<b;c++){a=g[c];G(a,{})}g=[];return[]}})}).call(this);
 
-pp.AI = function( callback )
+pp.KeyboardAI = function( callback )
 {
 	this.forward = 0;
 	this.turn = 0;
@@ -71,7 +71,7 @@ pp.AI = function( callback )
 	this.callback = callback;
 }
 
-pp.AI.prototype.receiveData = function( data )
+pp.KeyboardAI.prototype.receiveData = function( data )
 {
 	var forward = 0;
 	var turn = 0;

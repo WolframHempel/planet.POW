@@ -1,9 +1,11 @@
-pp.Player = function(world, tank)
+pp.Player = function(world)
 {
-	this.ai = new pp.AI(this);
+	this.ai = new pp.KeyboardAI(this);
 	this.world = world;
-	this.tank = tank;
 	this.world.on("update", this.receiveData, this);
+
+	this._oTank = new pp.object.Tank();
+	this.world.add( this._oTank );
 }
 
 pp.Player.prototype.receiveData = function( data )
@@ -12,5 +14,5 @@ pp.Player.prototype.receiveData = function( data )
 }
 pp.Player.prototype.receiveInstruction = function( instructions )
 {
-	this.tank.setInstructions(instructions.tank);
+	this._oTank.setInstructions(instructions.tank);
 }
