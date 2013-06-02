@@ -7,7 +7,7 @@ pp.object.Tank = function()
 	this._oMesh = new THREE.Mesh( this._oGeometry, this._oMaterial );
 	this._oWorld = null;
 
-    this._oVector = new THREE.Vector3( 0, 0, 20 );
+    this._oVector = new THREE.Vector3( 0, 0, 22.5 );
     this._oFacingVector =  new THREE.Vector3(0,-1,0);
 
 	this.instructions = {_nForward: 0, _nTurn: 0};
