@@ -12,11 +12,17 @@ pp.MathUtilities.rotateAroundWorldAxis =function( object, axis, radians ) {
     object.rotation.setEulerFromRotationMatrix( object.matrix );
 }
 
+pp.MathUtilities.duplicateVector = function( vector ) {
+	var currentPositionNorm = new THREE.Vector3();
+	currentPositionNorm.copy( vector );
+	return currentPositionNorm;
+}
+
 pp.MathUtilities.duplicateVectorNorm = function( vector ) {
-    var currentPositionNorm = new THREE.Vector3();
-    currentPositionNorm.copy( vector );
-    currentPositionNorm.normalize();
-    return currentPositionNorm;
+	var currentPositionNorm = new THREE.Vector3();
+	currentPositionNorm.copy( vector );
+	currentPositionNorm.normalize();
+	return currentPositionNorm;
 }
 
 pp.MathUtilities.rotateVectorAroundAxis = function( vector, axis, angle ) {
@@ -24,21 +30,30 @@ pp.MathUtilities.rotateVectorAroundAxis = function( vector, axis, angle ) {
     vector.applyMatrix4( matrix );
 }
 
-pp.MathUtilities.calculateRotationBetweenTwoNormals = function( currentPosition, directionVector, lat ) {
-    var tempVector = new THREE.Vector3( 0, 0, 0 );
+pp.MathUtilities.calculateRotationBetweenPlaneAndVector = function( currentPosition, directionVector, angle ) {
+	var tempVector = new THREE.Vector3( 0, 0, 0 );
 
-    var currentPositionNorm = pp.MathUtilities.duplicateVectorNorm( currentPosition )
-    var directionVectorNorm = pp.MathUtilities.duplicateVectorNorm( directionVector )
+	var currentPositionNorm = pp.MathUtilities.duplicateVectorNorm( currentPosition );
+	var directionVectorNorm = pp.MathUtilities.duplicateVectorNorm( directionVector );
 
-    //Axis that is perpendicular to yourLocation and your direction
-    var axis = pp.MathUtilities.getPerpendicular( currentPositionNorm, directionVectorNorm );
-    var angle = lat; //Math.acos(tempVector.dot(originalVector, targetVector));;
+	//Axis that is perpendicular to yourLocation and your direction
+	var axis = pp.MathUtilities.getPerpendicular( currentPositionNorm, directionVectorNorm );
 
-    var quaternion = new THREE.Quaternion();
-    quaternion.setFromAxisAngle( axis,angle );
-
-    return quaternion;
+	return pp.MathUtilities.calculateRotationBetweenTwoVectors(axis, angle);
 }
+
+
+pp.MathUtilities.calculateRotationBetweenTwoVectors = function( vector1, vector2 ) {
+	var axis = vector1;
+	var angle = vector2;
+
+	var quaternion = new THREE.Quaternion();
+	quaternion.setFromAxisAngle( axis,angle );
+
+	return quaternion;
+}
+
+
 
 pp.MathUtilities.getPerpendicular = function( vector1, vector2 ) {
     var tempVector = new THREE.Vector3( 0, 0, 0 );

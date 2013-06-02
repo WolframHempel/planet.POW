@@ -27,6 +27,7 @@ pp.KeyboardAI = function( callback )
 	this._bDownDown = false;
 	this._bRightDown = false;
 	this._bLeftDown = false;
+	this._bSpaceDown = false;
 	var my_scope = this;
 	var my_combos = [
 		{
@@ -65,6 +66,15 @@ pp.KeyboardAI = function( callback )
 				this._bLeftDown = false;
 			},
 			"this" : my_scope
+		},{
+			"keys" : "space",
+			"on_keydown" : function() {
+				this._bSpaceDown = true;
+			},
+			"on_keyup" : function(e) {
+				this._bSpaceDown = false;
+			},
+			"this" : my_scope
 		}
 	];
 	keypress.register_many(my_combos);
@@ -79,6 +89,6 @@ pp.KeyboardAI.prototype.receiveData = function( data )
 	this._bDownDown ? forward -= 0.01 : null ;
 	this._bRightDown ? turn -= 0.03 : null ;
 	this._bLeftDown ? turn += 0.03 : null ;
-	this.callback.receiveInstruction( {tank: {_nForward: forward , _nTurn: turn}} );
+	this.callback.receiveInstruction( {tank: {_nForward: forward , _nTurn: turn, _bFire: this._bSpaceDown}} );
 }
 

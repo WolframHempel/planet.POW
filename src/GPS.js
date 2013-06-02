@@ -1,6 +1,5 @@
-pp.GPS = function( planetRadius, vector, facingVector, mesh)
+pp.GPS = function(vector, facingVector, mesh)
 {
-	this._nPlanetRadius = planetRadius;
     this._oVector = vector;
     this._oFacingVector = facingVector;
     this._oMesh = mesh;
@@ -37,11 +36,17 @@ pp.GPS = function( planetRadius, vector, facingVector, mesh)
 //	return dLat;
 //}
 
-pp.GPS.prototype.move = function(forward, turn){
+pp.GPS.prototype.setFacing = function( facing )
+{
+	this._oFacingVector = facing;
+}
+
+pp.GPS.prototype.move = function( forward, turn )
+{
     var position = this._oVector;
     var facing = this._oFacingVector;
     var mesh = this._oMesh;
-    var quaternion = pp.MathUtilities.calculateRotationBetweenTwoNormals(position, facing, forward);
+    var quaternion = pp.MathUtilities.calculateRotationBetweenPlaneAndVector(position, facing, forward);
 
     //Calculate Tanks new position
     position.applyQuaternion( quaternion );
@@ -63,3 +68,4 @@ pp.GPS.prototype.move = function(forward, turn){
     pp.MathUtilities.rotateAroundWorldAxis(mesh, currentPositionNorm, turn);
     pp.MathUtilities.rotateVectorAroundAxis(facing, currentPositionNorm, turn);
 }
+

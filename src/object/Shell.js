@@ -1,27 +1,19 @@
 pp.ns( "pp.object" );
 
-pp.object.Shell = function()
+pp.object.Shell = function(position, facing)
 {
-	this._oGeometry =  new THREE.CubeGeometry(5,5,5);
+	this._oGeometry =  new THREE.CubeGeometry(1,3,1);
 	this._oMaterial = new THREE.MeshBasicMaterial({color: 0x000000, alpha: 0.1,  wireframe: true});
 	this._oMesh = new THREE.Mesh( this._oGeometry, this._oMaterial );
 
 	this._oWorld = null;
 
 	this._oVector = new THREE.Vector3( 0, 0, 22.5 );
-	this._oFacingVector =  new THREE.Vector3(0,-1,0);
+	this._oFacingVector =  new THREE.Vector3( 0,1,0 );
 
 	this.instructions = {_nForward: 0, _nTurn: 0};
-
-	long = 0;
-	lat = 0;
-
-	this.lat = 0;
-	this.long = 0;
-
-	this._oMesh.position.z = 20;
-
-	this.gps = new pp.GPS(20, this._oVector, this._oFacingVector,this._oMesh);
+	this.gps = new pp.GPS(this._oVector, this._oFacingVector,this._oMesh);
+	this.gps.setFacing( facing );
 };
 
 pp.object.Shell.prototype.setWorld = function( oWorld )
@@ -39,9 +31,8 @@ pp.object.Shell.prototype.destroy = function()
 
 pp.object.Shell.prototype.update = function( nTime )
 {
-	var forward = this.instructions._nForward;
-	var turn = this.instructions._nTurn;
-	this.gps.move(forward, turn);
+	var forward = 0.02;
+	this.gps.move(forward, 0);
 };
 
 
