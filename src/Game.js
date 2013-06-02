@@ -7,8 +7,8 @@ pp.Game = function( eContainer )
 	this._oWorld.add( this._oPlanet );
 
 	this._oWorld.addPlayer(pp.KeyboardAI);
-	this._oWorld.addPlayer(pp.ForwardAI);
-	this._oWorld.addPlayer(pp.TurnAI);
+	//this._oWorld.addPlayer(pp.ForwardAI);
+	//this._oWorld.addPlayer(pp.TurnAI);
 
 	// this._oAntiAircraft = new pp.object.AntiAircraft();
 	// this._oWorld.add( this._oAntiAircraft );

@@ -5,20 +5,13 @@ pp.object.Tank = function()
 	this._oGeometry =  new THREE.CubeGeometry(5,5,5);
 	this._oMaterial = new THREE.MeshBasicMaterial({color: 0x000000, alpha: 0.1,  wireframe: true});
 	this._oMesh = new THREE.Mesh( this._oGeometry, this._oMaterial );
+
 	this._oWorld = null;
 
     this._oVector = new THREE.Vector3( 0, 0, 22.5 );
-    this._oFacingVector =  new THREE.Vector3(0,-1,0);
+    this._oFacingVector =  new THREE.Vector3(0,1,0);
 
 	this.instructions = {_nForward: 0, _nTurn: 0};
-
-    long = 0;
-    lat = 0;
-
-    this.lat = 0;
-    this.long = 0;
-
-	this._oMesh.position.z = 20;
 
     this.gps = new pp.GPS(20, this._oVector, this._oFacingVector,this._oMesh);
 };
@@ -41,9 +34,7 @@ pp.object.Tank.prototype.update = function( nTime )
 
 
     var forward = this.instructions._nForward;
-    this.lat = lat;
     var turn = this.instructions._nTurn;
-    this.long = long;
 
     this.gps.move(forward, turn);
 };
